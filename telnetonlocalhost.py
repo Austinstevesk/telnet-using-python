@@ -9,8 +9,9 @@ password = getpass.getpass()
 tn = Telnet(host)
 tn.read_until("login")
 tn.write(user + "\n")
-tn.read_until(b'password')
-tn.write(password.encoded('ascii')+b'\n')
+if password:
+    tn.read_until(b'password')
+    tn.write(password.encoded('ascii')+b'\n')
 
 tn.read_until(b'<Huawei>').decode('ascii')
 
